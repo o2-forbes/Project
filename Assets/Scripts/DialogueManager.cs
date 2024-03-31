@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
     private int currentDialogueIndex = 0;
     private bool isAfterTriggerDialogue = false;
 
-    [SerializeField] private Image blackPanel; // Reference to the UI panel used for fading
+    [SerializeField] private Image blackPanel; 
 
     private void Start()
     {
