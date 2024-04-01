@@ -1,26 +1,20 @@
 using UnityEngine;
 
-public class StopMusicOnTrigger : MonoBehaviour
+public class ChestBehaviour : MonoBehaviour
 {
-    public GameObject musicPlayer;
+    public Animator chestAnimator;
+    public AudioSource chestSoundEffect;
+    bool hasBeenOpened = false;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasBeenOpened)
         {
-            StopMusic();
-        }
-    }
+            chestAnimator.SetTrigger("Open");
 
-    private void StopMusic()
-    {
-        if (musicPlayer != null)
-        {
-            AudioSource musicAudioSource = musicPlayer.GetComponent<AudioSource>();
-            if (musicAudioSource != null && musicAudioSource.isPlaying)
-            {
-                musicAudioSource.Stop();
-            }
+            chestSoundEffect.Play();
+
+            hasBeenOpened = true;
         }
     }
 }
