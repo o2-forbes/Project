@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.05f;
     [SerializeField] private float turnSpeed = 2f;
 
+    public GameObject endTrigger; // Reference to the EndTrigger GameObject
+
     private List<dialogueString> dialogueList;
 
     [Header("Player")]
@@ -111,6 +113,12 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueStop();
+
+        // Activate the EndTrigger GameObject when the dialogue finishes
+        if (endTrigger != null)
+        {
+            endTrigger.SetActive(true);
+        }
     }
 
     private void HandleOptionSelected(int indexJump)
@@ -153,5 +161,7 @@ public class DialogueManager : MonoBehaviour
         Cursor.visible = false;
 
         Camera.main.GetComponent<Cinemachine.CinemachineBrain>().enabled = true;
+
+        Debug.Log("Dialogue stopped"); // Check if this message is logged
     }
 }
