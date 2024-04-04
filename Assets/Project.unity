@@ -13655,9 +13655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5daef3885cffc9249b0ef1509002f573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titlePanel: {fileID: 1691773880}
-  storyPanel: {fileID: 967761907}
-  storyPanelActive: 0
 --- !u!1001 &972794532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24225,9 +24222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5daef3885cffc9249b0ef1509002f573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titlePanel: {fileID: 0}
-  storyPanel: {fileID: 0}
-  storyPanelActive: 0
 --- !u!1001 &1705551462
 PrefabInstance:
   m_ObjectHideFlags: 0

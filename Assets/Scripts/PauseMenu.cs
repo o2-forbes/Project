@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -33,24 +34,12 @@ public class PauseMenu : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 selectedOption = Mathf.Max(0, selectedOption - 1);
+                UpdateSelectedOption();
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                selectedOption = Mathf.Min(1, selectedOption + 1);
-            }
-
-            // Highlight selected option
-            // Assuming that the resume button is the first child and the quit button is the second child of the pauseMenu
-            for (int i = 0; i < pauseMenu.transform.childCount; i++)
-            {
-                var button = pauseMenu.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>();
-                if (button != null)
-                {
-                    if (i == selectedOption)
-                    {
-                        button.Select();
-                    }
-                }
+                selectedOption = Mathf.Min(pauseMenu.transform.childCount - 1, selectedOption + 1);
+                UpdateSelectedOption();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -60,11 +49,25 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    void UpdateSelectedOption()
+    {
+        for (int i = 0; i < pauseMenu.transform.childCount; i++)
+        {
+            var button = pauseMenu.transform.GetChild(i).GetComponent<Button>();
+            if (button != null)
+            {
+                button.interactable = (i == selectedOption);
+            }
+        }
+    }
+
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        selectedOption = 0;
+        UpdateSelectedOption();
     }
 
     public void ResumeGame()
@@ -81,16 +84,10 @@ public class PauseMenu : MonoBehaviour
 
     private void ActivateSelectedOption()
     {
-        switch (selectedOption)
+        var button = pauseMenu.transform.GetChild(selectedOption).GetComponent<Button>();
+        if (button != null && button.interactable)
         {
-            case 0:
-                ResumeGame();
-                break;
-            case 1:
-                QuitGame();
-                break;
-            default:
-                break;
+            button.onClick.Invoke();
         }
     }
 }
